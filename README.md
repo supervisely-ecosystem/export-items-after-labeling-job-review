@@ -9,11 +9,11 @@
   <a href="#How-To-Use">How To Use</a>
 </p>
 
-[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervise.ly/apps/supervisely-ecosystem/export-videos-after-labeling-job-review)
+[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervise.ly/apps/supervisely-ecosystem/export-items-after-labeling-job-review)
 [![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervise.ly/slack)
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/export-videos-after-labeling-job-review)
-[![views](https://app.supervise.ly/img/badges/views/supervisely-ecosystem/export-videos-after-labeling-job-review.png)](https://supervise.ly)
-[![runs](https://app.supervise.ly/img/badges/runs/supervisely-ecosystem/export-videos-after-labeling-job-review.png)](https://supervise.ly)
+![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/export-items-after-labeling-job-review)
+[![views](https://app.supervise.ly/img/badges/views/supervisely-ecosystem/export-items-after-labeling-job-review.png)](https://supervise.ly)
+[![runs](https://app.supervise.ly/img/badges/runs/supervisely-ecosystem/export-items-after-labeling-job-review.png)](https://supervise.ly)
 
 </div>
 
@@ -25,7 +25,7 @@ Export **accepted items** (images, videos, point clouds) from dataset after labe
 
 0. Create a labeling job, confirm items, submit it for review and review labels on items (accept or reject).
 
-1. Run the app from the ecosystem or context menu of **Labeling Job** -> `Run app` -> `Export` -> `Export videos after review`
+1. Run the app from the ecosystem or context menu of **Labeling Job** -> `Run app` -> `Export` -> `Export items after review`
 
 > Only accepted items will be exported
 
@@ -39,5 +39,5 @@ Export **accepted items** (images, videos, point clouds) from dataset after labe
 
 2. Result archive will be available for download by link at `Tasks` page or from `Team Files` by the following path:
 
-- `tmp` -> `supervisely` -> `export` -> `Export videos after review` -> `<task_id>` -> `reviewed items job_<job_id> project_<project_id>.tar.gz`
+- `tmp` -> `supervisely` -> `export` -> `Export items after review` -> `<task_id>` -> `reviewed items job_<job_id> project_<project_id>.tar.gz`
   <!-- <img src="https://user-images.githubusercontent.com/48913536/175984697-4066c217-8e93-4ba2-b916-1aabe77c2126.png"/> -->
