@@ -6,6 +6,7 @@
     "images",
     "pointclouds",
     "export",
+    "collaboration",
     "labeling_job"
   ],
   "main_script": "src/main.py",
