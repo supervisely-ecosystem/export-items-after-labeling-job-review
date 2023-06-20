@@ -22,7 +22,7 @@ def main():
         sly.logger.info(f"Found {len(reviewed_item_ids)} reviewed {items_type}")
 
         # make project directory path
-        result_dirname = f"reviewed items job_{g.JOB.id} project_{g.PROJECT.id}"
+        result_dirname = f"reviewed items job_{g.JOB.id} {g.PROJECT.name}_{g.PROJECT.id}"
         project_name = f"{g.PROJECT.name} (reviewed by job {g.JOB.id})"
         data_dir = sly.app.get_data_dir()
         result_dir = os.path.join(data_dir, result_dirname)
