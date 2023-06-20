@@ -11,7 +11,7 @@
   "main_script": "src/main.py",
   "headless": true,
   "icon": "",
-  "poster": "",
+  "poster": "https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/12828725/04184ec2-577f-4acc-af16-c33ddce44785",
   "context_menu": {
     "context_category": "Export",
     "target": ["labeling_job"]
