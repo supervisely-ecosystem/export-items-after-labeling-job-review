@@ -10,9 +10,8 @@
   ],
   "main_script": "src/main.py",
   "headless": true,
-  "icon": "https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/12828725/bad3465d-1ffc-42bc-b428-a75824ff5ab3",
+  "icon": "https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/119248312/9b8f3487-429c-4107-a8a1-7475b119bd20",
   "icon_cover": true,
-  "icon_background": "#FFFFFF",
   "poster": "https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/12828725/04184ec2-577f-4acc-af16-c33ddce44785",
   "context_menu": {
     "context_category": "Export",
