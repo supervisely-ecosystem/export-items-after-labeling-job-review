@@ -1,5 +1,5 @@
-<!-- <div align="center" markdown> -->
-<!-- <img src="https://user-images.githubusercontent.com/48245050/182545646-8af0b01f-d196-457f-a506-1cd2e0497f04.png"> -->
+<div align="center" markdown>
+<img src="https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/12828725/04184ec2-577f-4acc-af16-c33ddce44785">
 
 # Export items after passing the labeling job review
 
