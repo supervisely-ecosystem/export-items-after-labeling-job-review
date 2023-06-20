@@ -29,15 +29,16 @@ Export **accepted items** (images, videos, point clouds) from the dataset after 
 
 > Only the accepted items will be exported
 
-<!-- <img src="https://user-images.githubusercontent.com/48913536/175984626-bea22e06-5275-4364-97f1-5083f8b0c234.png"/> -->
+<img src="https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/79905215/308cd774-fc0e-47a1-8ca8-22a7759aed7e"/>
 
 # How To Use
 
 1. Wait for the app to process your data, once done, a link for download will become available.
 
-<!-- <img src="https://user-images.githubusercontent.com/48913536/175984683-417ffbb8-5c61-4206-9805-f766593d2bfe.png"/> -->
+<img src="https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/79905215/2eec8365-648f-41c9-b74d-0f6d9e9bde83"/>
 
 2. Result archive will be available for download by link at `Tasks` page or from `Team Files` by the following path:
 
-- `tmp` -> `supervisely` -> `export` -> `Export items after review` -> `<task_id>` -> `reviewed items job_<job_id> project_<project_id>.tar.gz`
-  <!-- <img src="https://user-images.githubusercontent.com/48913536/175984697-4066c217-8e93-4ba2-b916-1aabe77c2126.png"/> -->
+- `tmp` -> `supervisely` -> `export` -> `Export items after review` -> `<task_id>` -> `reviewed items job_<job_id> <project_name>_<project_id>.tar.gz`
+
+<img src="https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/79905215/9ddd2642-ee19-4a7b-a63e-24fe47f92469"/>
