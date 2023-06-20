@@ -23,7 +23,7 @@ def main():
 
         # make project directory path
         result_dirname = f"reviewed items job_{g.JOB.id} project_{g.PROJECT.id}"
-        project_name = f"{g.JOB.id}_job_{g.PROJECT.id}_{g.PROJECT.name}"
+        project_name = f"{g.PROJECT.name} (reviewed by job {g.JOB.id})"
         data_dir = sly.app.get_data_dir()
         result_dir = os.path.join(data_dir, result_dirname)
         project_dir = os.path.join(result_dir, project_name)
