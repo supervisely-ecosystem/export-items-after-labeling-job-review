@@ -1,0 +1,8 @@
+python-dotenv
+supervisely
+
+# formatter
+black
+
+# sorter
+isort
