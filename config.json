@@ -1,0 +1,19 @@
+{
+  "name": "Export items after review",
+  "description": "Export items after the passing labeling job review",
+  "categories": [
+    "videos",
+    "images",
+    "pointclouds",
+    "export",
+    "labeling_job"
+  ],
+  "main_script": "src/main.py",
+  "headless": true,
+  "icon": "",
+  "poster": "",
+  "context_menu": {
+    "context_category": "Export",
+    "target": ["labeling_job"]
+  }
+}
