@@ -19,13 +19,15 @@
 
 # Overview
 
-Export reviewed items from labeling job in Supervisely format. You can learn more about the Supervisely format and its structure by reading the [documentation](https://docs.supervise.ly/data-organization/00_ann_format_navi).
+Export **accepted items** (images, videos, point clouds) from dataset after labeling job reviewe in Supervisely format. You can learn more about the Supervisely format and its structure by reading the [documentation](https://docs.supervise.ly/data-organization/00_ann_format_navi).
 
 # How To Run
 
-0. Create a labeling job, submit it for review and review labels on items.
+0. Create a labeling job, confirm items, submit it for review and review labels on items (accept or reject).
 
 1. Run the app from the ecosystem or context menu of **Labeling Job** -> `Run app` -> `Export` -> `Export videos after review`
+
+> Only accepted items will be exported
 
 <!-- <img src="https://user-images.githubusercontent.com/48913536/175984626-bea22e06-5275-4364-97f1-5083f8b0c234.png"/> -->
 
@@ -37,5 +39,5 @@ Export reviewed items from labeling job in Supervisely format. You can learn mor
 
 2. Result archive will be available for download by link at `Tasks` page or from `Team Files` by the following path:
 
-- `tmp` -> `supervisely` -> `export` -> `Export videos after review` -> `<task_id>` -> `<projectId>_<projectName>.tar`
+- `tmp` -> `supervisely` -> `export` -> `Export videos after review` -> `<task_id>` -> `reviewed items job_<job_id> project_<project_id>.tar.gz`
   <!-- <img src="https://user-images.githubusercontent.com/48913536/175984697-4066c217-8e93-4ba2-b916-1aabe77c2126.png"/> -->
