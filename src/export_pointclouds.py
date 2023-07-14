@@ -7,6 +7,8 @@ from supervisely.io.json import dump_json_file
 
 from tqdm import tqdm
 
+import globals as g
+
 
 def export_pointclouds(
     api: sly.Api,
@@ -38,16 +40,17 @@ def export_pointclouds(
             pc_ann = sly.PointcloudAnnotation.from_json(ann_json, project_meta, key_id_map)
             pointcloud_file_path = dataset_fs.generate_item_path(pointcloud_name)
 
-            api.pointcloud.download_path(pointcloud_id, pointcloud_file_path)
-            related_images_path = dataset_fs.get_related_images_path(pointcloud_name)
-            related_images = api.pointcloud.get_list_related_images(pointcloud_id)
-            for rimage_info in related_images:
-                name = rimage_info[ApiField.NAME]
-                rimage_id = rimage_info[ApiField.ID]
-                path_img = os.path.join(related_images_path, name)
-                path_json = os.path.join(related_images_path, name + ".json")
-                api.pointcloud.download_related_image(rimage_id, path_img)
-                dump_json_file(rimage_info, path_json)
+            if g.DOWNLOAD_ITEMS:
+                api.pointcloud.download_path(pointcloud_id, pointcloud_file_path)
+                related_images_path = dataset_fs.get_related_images_path(pointcloud_name)
+                related_images = api.pointcloud.get_list_related_images(pointcloud_id)
+                for rimage_info in related_images:
+                    name = rimage_info[ApiField.NAME]
+                    rimage_id = rimage_info[ApiField.ID]
+                    path_img = os.path.join(related_images_path, name)
+                    path_json = os.path.join(related_images_path, name + ".json")
+                    api.pointcloud.download_related_image(rimage_id, path_img)
+                    dump_json_file(rimage_info, path_json)
 
             dataset_fs.add_item_file(
                 pointcloud_name, pointcloud_file_path, ann=pc_ann, _validate_item=False
