@@ -21,6 +21,10 @@
 
 Export **accepted items** (images, videos, point clouds) from the dataset after labeling job review in Supervisely format. You can learn more about the Supervisely format, and its structure by reading the [documentation](https://docs.supervise.ly/data-organization/00_ann_format_navi).
 
+Releases:
+
+ - [**v1.0.4 release**](https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/releases/tag/v1.0.4): added an option for downloading only annotations without items.
+
 # How To Run
 
 0. Create a labeling job, confirm the items, submit it for review, and review the labels (accept or reject).
