@@ -44,6 +44,5 @@ def export_images(
             for name, ann_json in zip(image_names, ann_jsons):
                 ann = sly.Annotation.from_json(ann_json, project_meta)
                 sly.io.json.dump_json_file(ann_json, os.path.join(ann_dir, name + '.json'))
-                labeled_items_cnt += 1
 
         progress.update(len(batch))
