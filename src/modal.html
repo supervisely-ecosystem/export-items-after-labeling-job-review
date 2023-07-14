@@ -1,0 +1,17 @@
+
+<div>
+    <sly-field title="Download items"
+               description="Download project with items (images or videos or pointclouds) or only annotations">
+        <div class="fflex" style="flex-direction: column; align-items: flex-start">
+            <el-radio class="radio"
+                      v-model="state.items"
+                      label="True">Download items and annotations
+            </el-radio>
+            <el-radio class="radio"
+                      v-model="state.items"
+                      label="False"
+                      style="margin-left: 0;">Download only annotations
+            </el-radio>
+        </div>
+    </sly-field>
+</div>
