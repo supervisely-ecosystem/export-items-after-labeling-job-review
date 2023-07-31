@@ -9,6 +9,7 @@
     "collaboration",
     "labeling_job"
   ],
+  "docker_image": "supervisely/collaboration:0.0.5",
   "main_script": "src/main.py",
   "headless": true,
   "modal_template": "src/modal.html",
