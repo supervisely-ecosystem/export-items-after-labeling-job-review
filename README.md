@@ -9,17 +9,17 @@
   <a href="#How-To-Use">How To Use</a>
 </p>
 
-[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervise.ly/apps/supervisely-ecosystem/export-items-after-labeling-job-review)
-[![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervise.ly/slack)
+[![](https://img.shields.io/badge/supervisely-ecosystem-brightgreen)](https://ecosystem.supervisely.com/apps/supervisely-ecosystem/export-items-after-labeling-job-review)
+[![](https://img.shields.io/badge/slack-chat-green.svg?logo=slack)](https://supervisely.com/slack)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/supervisely-ecosystem/export-items-after-labeling-job-review)
-[![views](https://app.supervise.ly/img/badges/views/supervisely-ecosystem/export-items-after-labeling-job-review.png)](https://supervise.ly)
-[![runs](https://app.supervise.ly/img/badges/runs/supervisely-ecosystem/export-items-after-labeling-job-review.png)](https://supervise.ly)
+[![views](https://app.supervisely.com/img/badges/views/supervisely-ecosystem/export-items-after-labeling-job-review.png)](https://supervisely.com)
+[![runs](https://app.supervisely.com/img/badges/runs/supervisely-ecosystem/export-items-after-labeling-job-review.png)](https://supervisely.com)
 
 </div>
 
 # Overview
 
-Export **accepted items** (images, videos, point clouds) from the dataset after labeling job review in Supervisely format. You can learn more about the Supervisely format, and its structure by reading the [documentation](https://docs.supervise.ly/data-organization/00_ann_format_navi).
+Export **accepted items** (images, videos, point clouds) from the dataset after labeling job review in Supervisely format. You can learn more about the Supervisely format, and its structure by reading the [documentation](https://docs.supervisely.com/data-organization/00_ann_format_navi).
 
 Releases:
 
