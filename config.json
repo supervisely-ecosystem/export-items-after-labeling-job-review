@@ -1,27 +1,27 @@
 {
-  "name": "Export items after review",
-  "description": "Export items after the passing labeling job review",
-  "categories": [
-    "videos",
-    "images",
-    "pointclouds",
-    "export",
-    "collaboration",
-    "labeling_job"
-  ],
-  "docker_image": "supervisely/import-export:6.73.290",
+	"name": "Export Items After Review",
+	"description": "Export items after the passing labeling job review",
+	"categories": [
+		"videos",
+		"images",
+		"pointclouds",
+		"export",
+		"collaboration",
+		"labeling_job"
+	],
+	"docker_image": "supervisely/import-export:6.73.290",
 	"instance_version": "6.12.23",
-  "main_script": "src/main.py",
-  "headless": true,
-  "modal_template": "src/modal.html",
-  "modal_template_state": {
-    "items": true
-  },
-  "icon": "https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/119248312/9b8f3487-429c-4107-a8a1-7475b119bd20",
-  "icon_cover": true,
-  "poster": "https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/12828725/04184ec2-577f-4acc-af16-c33ddce44785",
-  "context_menu": {
-    "context_category": "Export",
-    "target": ["labeling_job"]
-  }
+	"main_script": "src/main.py",
+	"headless": true,
+	"modal_template": "src/modal.html",
+	"modal_template_state": {
+		"items": true
+	},
+	"icon": "https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/119248312/9b8f3487-429c-4107-a8a1-7475b119bd20",
+	"icon_cover": true,
+	"poster": "https://github.com/supervisely-ecosystem/export-items-after-labeling-job-review/assets/12828725/04184ec2-577f-4acc-af16-c33ddce44785",
+	"context_menu": {
+		"context_category": "Export",
+		"target": ["labeling_job"]
+	}
 }

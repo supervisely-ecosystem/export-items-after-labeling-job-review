@@ -4,17 +4,17 @@ import supervisely as sly
 from src.export_videos import export_videos
 from src.export_images import export_images
 from src.export_pointclouds import export_pointclouds
+from supervisely.project.project import Project
 
 import globals as g
-
 
 items_type = " ".join(g.PROJECT.type.split("_"))
 reviewed_item_ids = [item["id"] for item in g.JOB.entities if item["reviewStatus"] == "accepted"]
 
 if g.DATASET.items_count < 1:
-    sly.logger.warn(f"Dataset {g.DATASET.name} is empty")
+    sly.logger.warning(f"Dataset {g.DATASET.name} is empty")
 elif len(reviewed_item_ids) < 1:
-    sly.logger.warn(f"Not found {items_type} accepted by reviewer")
+    sly.logger.warning(f"Not found {items_type} accepted by reviewer")
 else:
     sly.logger.info(f"Found {len(reviewed_item_ids)} reviewed {items_type}")
 
@@ -31,10 +31,26 @@ else:
     project_meta = sly.ProjectMeta.from_json(meta_json)
 
     sly.logger.info(f"Project type is {g.PROJECT.type}")
+    loop = sly.fs.get_or_create_event_loop()
     if g.PROJECT.type == str(sly.ProjectType.VIDEOS):
         export_videos(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
     elif g.PROJECT.type == str(sly.ProjectType.IMAGES):
-        export_images(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
+        try:
+            coro = Project.download_async(
+                g.api,
+                g.PROJECT.id,
+                project_dir,
+                [g.DATASET.id],
+                save_images=g.DOWNLOAD_ITEMS,
+                images_ids=reviewed_item_ids,
+            )
+            loop.run_until_complete(coro)
+        except Exception as e:
+            sly.logger.error(
+                f"Failed to download images with async. Switching to sync download", exc_info=True
+            )
+            export_images(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
+
     elif g.PROJECT.type == str(sly.ProjectType.POINT_CLOUDS):
         export_pointclouds(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
     else:
