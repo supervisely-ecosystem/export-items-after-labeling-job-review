@@ -9,8 +9,8 @@
 		"collaboration",
 		"labeling_job"
 	],
-	"docker_image": "supervisely/import-export:6.73.290",
-	"instance_version": "6.12.23",
+	"docker_image": "supervisely/import-export:6.73.296",
+	"instance_version": "6.12.28",
 	"main_script": "src/main.py",
 	"headless": true,
 	"modal_template": "src/modal.html",
