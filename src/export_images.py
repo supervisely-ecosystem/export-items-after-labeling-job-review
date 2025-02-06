@@ -39,10 +39,10 @@ def export_images(
                 ann = sly.Annotation.from_json(ann_json, project_meta)
                 dataset_fs.add_item_raw_bytes(name, img_bytes, ann)
         else:
-            ann_dir = os.path.join(project_dir, dataset_fs.name, 'ann')
+            ann_dir = os.path.join(project_dir, dataset_fs.name, "ann")
             sly.fs.mkdir(ann_dir)
             for name, ann_json in zip(image_names, ann_jsons):
                 ann = sly.Annotation.from_json(ann_json, project_meta)
-                sly.io.json.dump_json_file(ann_json, os.path.join(ann_dir, name + '.json'))
+                sly.io.json.dump_json_file(ann_json, os.path.join(ann_dir, name + ".json"))
 
         progress.update(len(batch))
