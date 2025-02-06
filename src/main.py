@@ -1,9 +1,9 @@
 import os
 import supervisely as sly
 
-from src.export_videos import export_videos
+from src.export_videos import export_videos, export_videos_async
 from src.export_images import export_images
-from src.export_pointclouds import export_pointclouds
+from src.export_pointclouds import export_pointclouds, export_pointclouds_async
 from supervisely.project.project import Project
 
 import globals as g
@@ -33,7 +33,14 @@ else:
     sly.logger.info(f"Project type is {g.PROJECT.type}")
     loop = sly.fs.get_or_create_event_loop()
     if g.PROJECT.type == str(sly.ProjectType.VIDEOS):
-        export_videos(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
+        try:
+            export_videos_async(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
+        except Exception as e:
+            sly.logger.warning(
+                f"Failed to download videos with async. Error: {repr(e)}. Switching to sync download"
+            )
+            sly.fs.remove_dir(project_dir)
+            export_videos(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
     elif g.PROJECT.type == str(sly.ProjectType.IMAGES):
         try:
             coro = Project.download_async(
@@ -46,13 +53,21 @@ else:
             )
             loop.run_until_complete(coro)
         except Exception as e:
-            sly.logger.error(
-                f"Failed to download images with async. Switching to sync download", exc_info=True
+            sly.logger.warning(
+                f"Failed to download images with async. Error: {repr(e)}. Switching to sync download"
             )
+            sly.fs.remove_dir(project_dir)
             export_images(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
 
     elif g.PROJECT.type == str(sly.ProjectType.POINT_CLOUDS):
-        export_pointclouds(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
+        try:
+            export_pointclouds_async(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
+        except Exception as e:
+            sly.logger.warning(
+                f"Failed to download pointclouds with async. Error: {repr(e)}. Switching to sync download"
+            )
+            sly.fs.remove_dir(project_dir)
+            export_pointclouds(g.api, g.DATASET, reviewed_item_ids, project_dir, project_meta)
     else:
         raise RuntimeError(f"Project type {g.PROJECT.type} is not supported")
 
