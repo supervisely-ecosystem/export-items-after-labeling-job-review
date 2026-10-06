@@ -20,6 +20,7 @@ JOB = api.labeling_job.get_info_by_id(JOB_ID)
 PROJECT = api.project.get_info_by_id(JOB.project_id)
 DATASET = api.dataset.get_info_by_id(JOB.dataset_id)
 DOWNLOAD_ITEMS = bool(strtobool(os.getenv("modal.state.items")))
+ASYNC_BATCH_SIZE = 50
 
 if JOB is None or DATASET is None or PROJECT is None:
     raise RuntimeError("Job, project or dataset not found")
