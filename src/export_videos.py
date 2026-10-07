@@ -9,6 +9,28 @@ from tqdm import tqdm
 import globals as g
 
 
+def drop_out_of_range_frames(ann_json: dict, video_id: int, video_name: str) -> dict:
+    """Drop frames that lie outside the video, so one such video does not fail the whole export."""
+    frames_count = ann_json.get("framesCount")
+    in_range, skipped = [], []
+    for frame in ann_json.get("frames", []):
+        # same bounds VideoAnnotation.from_json enforces
+        index = frame["index"]
+        if index < 0 or (frames_count is not None and index > frames_count):
+            skipped.append(frame)
+        else:
+            in_range.append(frame)
+    if not skipped:
+        return ann_json
+    figures_count = sum(len(frame.get("figures", [])) for frame in skipped)
+    sly.logger.warning(
+        f"Video '{video_name}' (id: {video_id}) has {frames_count} frames, but {figures_count} "
+        f"figure(s) are on frame(s) {[frame['index'] for frame in skipped]} outside it. "
+        "They are skipped in the export; delete them in the video to remove this warning."
+    )
+    return {**ann_json, "frames": in_range}
+
+
 def export_videos(
     api: sly.Api,
     dataset: sly.Dataset,
@@ -33,6 +55,7 @@ def export_videos(
         ann_jsons = api.video.annotation.download_bulk(dataset.id, video_ids)
 
         for video_id, video_name, ann_json in zip(video_ids, video_names, ann_jsons):
+            ann_json = drop_out_of_range_frames(ann_json, video_id, video_name)
             video_ann = sly.VideoAnnotation.from_json(ann_json, project_meta, key_id_map)
             if os.path.splitext(video_name)[1] == "":
                 video_name = f"{video_name}.mp4"
@@ -78,8 +101,12 @@ def export_videos_async(
             api.video.annotation.download_bulk_async(video_ids, progress_cb=progress_anns)
         )
         anns = [
-            sly.VideoAnnotation.from_json(ann_json, project_meta, key_id_map)
-            for ann_json in ann_jsons
+            sly.VideoAnnotation.from_json(
+                drop_out_of_range_frames(ann_json, video_id, video_name),
+                project_meta,
+                key_id_map,
+            )
+            for video_id, video_name, ann_json in zip(video_ids, video_names, ann_jsons)
         ]
         video_file_paths = []
         for video_name in video_names:
