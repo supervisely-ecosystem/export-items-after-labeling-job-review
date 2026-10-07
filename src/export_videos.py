@@ -1,4 +1,5 @@
 import os
+import uuid
 from typing import List
 import supervisely as sly
 import asyncio
@@ -31,6 +32,38 @@ def drop_out_of_range_frames(ann_json: dict, video_id: int, video_name: str) -> 
     return {**ann_json, "frames": in_range}
 
 
+def register_keys(ann_json: dict, key_id_map: KeyIdMap) -> dict:
+    """Record keys and ids in key_id_map as VideoAnnotation.from_json does, without decoding masks.
+
+    Parsing the whole annotation decodes every bitmap into a numpy array, which on mask-heavy
+    videos takes many times the memory of the JSON itself. The JSON is written to the export as is.
+    """
+
+    def ensure_key(item: dict) -> uuid.UUID:
+        # from_json generates a key when there is none, and to_json writes it out
+        if "key" not in item:
+            item["key"] = uuid.uuid4().hex
+        return uuid.UUID(item["key"])
+
+    key_id_map.add_video(ensure_key(ann_json), ann_json.get("videoId"))
+    for tag in ann_json.get("tags", []):
+        key_id_map.add_tag(ensure_key(tag), tag.get("id"))
+    object_keys = {}
+    for obj in ann_json.get("objects", []):
+        key = ensure_key(obj)
+        key_id_map.add_object(key, obj.get("id"))
+        if obj.get("id") is not None:
+            object_keys[obj["id"]] = key.hex
+        for tag in obj.get("tags", []):
+            ensure_key(tag)
+    for frame in ann_json.get("frames", []):
+        for figure in frame.get("figures", []):
+            key_id_map.add_figure(ensure_key(figure), figure.get("id"))
+            if "objectKey" not in figure and figure.get("objectId") in object_keys:
+                figure["objectKey"] = object_keys[figure["objectId"]]
+    return ann_json
+
+
 def export_videos(
     api: sly.Api,
     dataset: sly.Dataset,
@@ -56,14 +89,14 @@ def export_videos(
 
         for video_id, video_name, ann_json in zip(video_ids, video_names, ann_jsons):
             ann_json = drop_out_of_range_frames(ann_json, video_id, video_name)
-            video_ann = sly.VideoAnnotation.from_json(ann_json, project_meta, key_id_map)
+            ann_json = register_keys(ann_json, key_id_map)
             if os.path.splitext(video_name)[1] == "":
                 video_name = f"{video_name}.mp4"
             video_file_path = dataset_fs.generate_item_path(video_name)
             if g.DOWNLOAD_ITEMS:
                 api.video.download_path(video_id, video_file_path)
             dataset_fs.add_item_file(
-                video_name, video_file_path, ann=video_ann, _validate_item=False
+                video_name, video_file_path, ann=ann_json, _validate_item=False
             )
 
         progress.update(len(batch))
@@ -101,11 +134,7 @@ def export_videos_async(
             api.video.annotation.download_bulk_async(video_ids, progress_cb=progress_anns)
         )
         anns = [
-            sly.VideoAnnotation.from_json(
-                drop_out_of_range_frames(ann_json, video_id, video_name),
-                project_meta,
-                key_id_map,
-            )
+            register_keys(drop_out_of_range_frames(ann_json, video_id, video_name), key_id_map)
             for video_id, video_name, ann_json in zip(video_ids, video_names, ann_jsons)
         ]
         video_file_paths = []
